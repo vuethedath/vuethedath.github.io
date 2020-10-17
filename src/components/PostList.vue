@@ -1,11 +1,13 @@
 <template>
   <div>
-    <h1>Sortable Post List</h1>
+    <h2 id="heading">Sortable Post List</h2>
     <Post
       v-for="(item, index) in posts"
       :post="item"
       :postIndex="index"
       :key="item.id"
+      :showUp="index !== 0"
+      :showDown="index + 1 < posts.length"
       @onPostMove="onPostMove"
     />
   </div>
@@ -31,4 +33,11 @@ export default {
 </script>
 
 <style scoped>
+div {
+  padding: 15px;
+}
+#heading {
+  margin: 15px;
+  color: white;
+}
 </style>

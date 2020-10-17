@@ -1,11 +1,16 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm">
-        <PostList :posts="posts" @onPostMove="onPostMove"></PostList>
-      </div>
-      <div class="col-sm">
-        <HistoryList :history="history" @onTimeTravel="onTimeTravel"></HistoryList>
+  <div id="root-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <PostList :posts="posts" @onPostMove="onPostMove"></PostList>
+        </div>
+        <div class="col-sm">
+          <HistoryList
+            :history="history"
+            @onTimeTravel="onTimeTravel"
+          ></HistoryList>
+        </div>
       </div>
     </div>
   </div>
@@ -56,7 +61,7 @@ export default {
               toIndex,
             },
             ...this.history,
-          ]
+          ];
         }
       }
     },
@@ -65,14 +70,21 @@ export default {
       let postListCopy = [...this.posts];
       for (let i = 0; i <= historyItemIndex; i++) {
         const history = historyListCopy[i];
-        const swapResponse = this.swapPost(postListCopy, history.toIndex, history.fromIndex);
+        const swapResponse = this.swapPost(
+          postListCopy,
+          history.toIndex,
+          history.fromIndex
+        );
         if (swapResponse) {
           postListCopy = swapResponse.newPostList;
         }
       }
       this.posts = postListCopy;
-      this.history = historyListCopy.slice(historyItemIndex + 1, historyListCopy.length);
-    }
+      this.history = historyListCopy.slice(
+        historyItemIndex + 1,
+        historyListCopy.length
+      );
+    },
   },
   components: {
     PostList,
@@ -88,4 +100,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#root-wrapper {
+  background: linear-gradient(
+    172deg,
+    #3949ab 0%,
+    #3949ab 15%,
+    #eeeeee 15%,
+    #eeeeee 100%
+  );
+}
+</style>

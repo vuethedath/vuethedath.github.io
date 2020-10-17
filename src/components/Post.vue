@@ -1,10 +1,18 @@
 <template>
-  <div>
-    <h4>{{ post.id }}</h4>
-    <h6>{{ post.title }}</h6>
-    <p>{{ post.body }}</p>
-    <button type="button" class="btn btn-success" @click="move('up')">Move Up</button>
-    <button type="button" class="btn btn-danger" @click="move('down')">Move Down</button>
+  <div id="post" class="card">
+    <div class="card-body">
+      <h5 class="card-title">
+        <span id="postId">{{ post.id }}</span
+        >{{ post.title }}
+      </h5>
+      <p class="card-text">{{ post.body }}</p>
+      <button v-if="showUp" id="buttons" type="button" class="btn btn-success" @click="move('up')">
+        Move Up
+      </button>
+      <button v-if="showDown" id="buttons" type="button" class="btn btn-danger" @click="move('down')">
+        Move Down
+      </button>
+    </div>
   </div>
 </template>
 
@@ -14,21 +22,26 @@ export default {
   props: {
     post: Object,
     postIndex: Number,
+    showUp: Boolean,
+    showDown: Boolean,
   },
   methods: {
     move(action) {
-      this.$emit('onPostMove', this.postIndex, action);
+      this.$emit("onPostMove", this.postIndex, action);
     },
-  }
+  },
 };
 </script>
 
 <style scoped>
-div {
-  width: 500px;
-  height: auto;
-  margin: 20px;
-  padding: 20px;
-  background-color: gray;
+#post {
+  margin: 15px;
+}
+#postId {
+  color: blueviolet;
+  margin-right: 20px;
+}
+#buttons {
+  margin-right: 15px;
 }
 </style>
