@@ -1,13 +1,18 @@
 <template>
-  <div>
-    <h1>Action History</h1>
+  <div class="card card-body">
+    <div id="heading">
+      <h5>Action History</h5>
+      <p v-if="history.length === 0">
+        Move some posts to generate history . . .
+      </p>
+    </div>
     <History
       v-for="(item, index) in history"
       :historyItem="item"
       :historyItemIndex="index"
       :key="index"
       @onTimeTravel="onTimeTravel"
-    />
+    ></History>
   </div>
 </template>
 
@@ -21,7 +26,7 @@ export default {
   },
   methods: {
     onTimeTravel(historyItemIndex) {
-      this.$emit('onTimeTravel', historyItemIndex);
+      this.$emit("onTimeTravel", historyItemIndex);
     },
   },
   components: {
@@ -31,4 +36,10 @@ export default {
 </script>
 
 <style scoped>
+div {
+  padding: 15px;
+}
+#heading {
+  margin: 15px;
+}
 </style>

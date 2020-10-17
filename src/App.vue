@@ -109,5 +109,6 @@ export default {
     #eeeeee 15%,
     #eeeeee 100%
   );
+  padding: 15px;
 }
 </style>
